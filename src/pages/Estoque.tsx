@@ -1,31 +1,34 @@
 import { usePizzaria } from '../contexts/PizzariaContext';
 import { Package, AlertTriangle, Plus, Edit2 } from 'lucide-react';
 import { useState } from 'react';
+import { ItemEstoque as ItemEstoqueType } from '../types';
+
+type Unidade = 'kg' | 'g' | 'L' | 'ml' | 'unidade';
 
 const Estoque = () => {
   const { estoque, atualizarEstoque, adicionarItemEstoque } = usePizzaria();
-  const [editando, setEditando] = useState(null);
+  const [editando, setEditando] = useState<number | null>(null);
   const [novaQuantidade, setNovaQuantidade] = useState('');
   const [mostrarModal, setMostrarModal] = useState(false);
   const [novoItem, setNovoItem] = useState({
     nome: '',
     quantidade: '',
-    unidade: 'kg',
+    unidade: 'kg' as Unidade,
     minimo: '',
   });
 
-  const handleEditar = (item) => {
+  const handleEditar = (item: ItemEstoqueType) => {
     setEditando(item.id);
-    setNovaQuantidade(item.quantidade);
+    setNovaQuantidade(item.quantidade.toString());
   };
 
-  const handleSalvar = (id) => {
+  const handleSalvar = (id: number) => {
     atualizarEstoque(id, parseFloat(novaQuantidade));
     setEditando(null);
     setNovaQuantidade('');
   };
 
-  const handleAdicionarItem = (e) => {
+  const handleAdicionarItem = (e: React.FormEvent) => {
     e.preventDefault();
     adicionarItemEstoque({
       nome: novoItem.nome,
@@ -179,7 +182,7 @@ const Estoque = () => {
                   <label className="block text-gray-700 font-medium mb-2">Unidade</label>
                   <select
                     value={novoItem.unidade}
-                    onChange={(e) => setNovoItem({ ...novoItem, unidade: e.target.value })}
+                    onChange={(e) => setNovoItem({ ...novoItem, unidade: e.target.value as Unidade })}
                     className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
                   >
                     <option value="kg">kg</option>

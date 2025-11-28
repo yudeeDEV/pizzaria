@@ -60,7 +60,7 @@ const Busca = () => {
               <option value="pizzas">Pizzas</option>
               <option value="pedidos">Pedidos</option>
             </select>
-            {tipoBusca === 'pedidos' && (
+            {tipoBusca === 'pedidos' && (   
               <select
                 value={filtroStatus}
                 onChange={(e) => setFiltroStatus(e.target.value)}

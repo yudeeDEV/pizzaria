@@ -1,16 +1,19 @@
 import { useState } from 'react';
 import { usePizzaria } from '../contexts/PizzariaContext';
-import { Plus, Edit2, Trash2, X, AlertCircle, Pizza } from 'lucide-react';
+import { Plus, Edit2, Trash2, X, AlertCircle, Pizza as PizzaIcon } from 'lucide-react';
+import { Pizza } from '../types';
+
+type Tamanho = 'pequena' | 'média' | 'grande' | 'família';
 
 const Pizzas = () => {
   const { pizzas, adicionarPizza, editarPizza, deletarPizza } = usePizzaria();
   const [mostrarModal, setMostrarModal] = useState(false);
-  const [pizzaEditando, setPizzaEditando] = useState(null);
+  const [pizzaEditando, setPizzaEditando] = useState<Pizza | null>(null);
   const [formData, setFormData] = useState({
     nome: '',
     ingredientes: '',
     preco: '',
-    tamanho: 'média',
+    tamanho: 'média' as Tamanho,
     disponivel: true,
   });
 
@@ -19,18 +22,18 @@ const Pizzas = () => {
       nome: '',
       ingredientes: '',
       preco: '',
-      tamanho: 'média',
+      tamanho: 'média' as Tamanho,
       disponivel: true,
     });
     setPizzaEditando(null);
   };
 
-  const abrirModal = (pizza = null) => {
+  const abrirModal = (pizza: Pizza | null = null) => {
     if (pizza) {
       setFormData({
         nome: pizza.nome,
         ingredientes: pizza.ingredientes,
-        preco: pizza.preco,
+        preco: pizza.preco.toString(),
         tamanho: pizza.tamanho,
         disponivel: pizza.disponivel,
       });
@@ -46,7 +49,7 @@ const Pizzas = () => {
     resetForm();
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const pizzaData = {
       ...formData,
@@ -62,7 +65,7 @@ const Pizzas = () => {
     fecharModal();
   };
 
-  const handleDelete = (id) => {
+  const handleDelete = (id: number) => {
     if (window.confirm('Tem certeza que deseja deletar esta pizza?')) {
       deletarPizza(id);
     }
@@ -84,7 +87,7 @@ const Pizzas = () => {
       {/* Banner informativo */}
       <div className="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6">
         <div className="flex items-center">
-          <Pizza className="text-blue-500 mr-3" size={24} />
+          <PizzaIcon className="text-blue-500 mr-3" size={24} />
           <div>
             <h3 className="text-blue-800 font-bold">Pizzas Originais</h3>
             <p className="text-blue-700 text-sm">
@@ -112,7 +115,7 @@ const Pizzas = () => {
                   <h3 className="text-xl font-bold text-gray-800">{pizza.nome}</h3>
                   {pizza.origem === 'servidor' && (
                     <span className="bg-blue-100 text-blue-800 text-xs font-medium px-2 py-1 rounded flex items-center gap-1">
-                      <Pizza size={12} />
+                      <PizzaIcon size={12} />
                       Original
                     </span>
                   )}
@@ -202,7 +205,7 @@ const Pizzas = () => {
                       setFormData({ ...formData, ingredientes: e.target.value })
                     }
                     className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
-                    rows="3"
+                    rows={3}
                     required
                   />
                 </div>
@@ -212,7 +215,7 @@ const Pizzas = () => {
                   </label>
                   <select
                     value={formData.tamanho}
-                    onChange={(e) => setFormData({ ...formData, tamanho: e.target.value })}
+                    onChange={(e) => setFormData({ ...formData, tamanho: e.target.value as Tamanho })}
                     className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
                   >
                     <option value="pequena">Pequena</option>

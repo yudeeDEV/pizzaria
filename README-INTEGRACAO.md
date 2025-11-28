@@ -1,4 +1,4 @@
-# 🍕 Sistema de Gerenciamento de Pizzaria Marcio
+# 🍕 Sistema de Gerenciamento de Pizzaria Mana
 
 Sistema completo para gerenciamento de pizzaria desenvolvido em React com **integração híbrida**: dados do servidor + localStorage.
 
@@ -190,5 +190,5 @@ const pizzasServidor = [
 
 ---
 
-**Desenvolvido para Pizzaria Marcio**  
+**Desenvolvido para Pizzaria Mana**  
 Sistema híbrido com integração backend + localStorage 🚀

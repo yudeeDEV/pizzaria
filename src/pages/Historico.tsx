@@ -6,12 +6,12 @@ const Historico = () => {
 
   const pedidosFinalizados = pedidos
     .filter(p => p.status === 'Finalizado')
-    .sort((a, b) => new Date(b.data) - new Date(a.data));
+    .sort((a, b) => new Date(b.data).getTime() - new Date(a.data).getTime());
 
   const totalVendas = pedidosFinalizados.reduce((acc, p) => acc + p.total, 0);
   const quantidadePedidos = pedidosFinalizados.length;
 
-  const formatarData = (dataISO) => {
+  const formatarData = (dataISO: string) => {
     const data = new Date(dataISO);
     return data.toLocaleDateString('pt-BR', {
       day: '2-digit',

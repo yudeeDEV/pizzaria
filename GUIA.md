@@ -1,4 +1,4 @@
-# 🍕 Sistema de Gerenciamento de Pizzaria Marcio
+# 🍕 Sistema de Gerenciamento de Pizzaria Mana
 
 Sistema completo para gerenciamento de pizzaria desenvolvido em React com armazenamento local (localStorage).
 
@@ -132,7 +132,7 @@ O sistema vem com itens de estoque pré-cadastrados:
 
 ## 👨‍💻 Desenvolvido por
 
-Sistema de gerenciamento para Pizzaria Marcio
+Sistema de gerenciamento para Pizzaria Mana
 
 ---
 

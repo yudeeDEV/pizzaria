@@ -16,7 +16,7 @@ const Relatorio = () => {
 
     return pedidosFinalizados.filter(p => {
       const dataPedido = new Date(p.data);
-      const diferencaDias = (hoje - dataPedido) / umDiaMs;
+      const diferencaDias = (hoje.getTime() - dataPedido.getTime()) / umDiaMs;
 
       switch (periodo) {
         case 'hoje':
@@ -39,7 +39,7 @@ const Relatorio = () => {
   const ticketMedio = quantidadePedidos > 0 ? totalVendas / quantidadePedidos : 0;
 
   // Pizza mais vendida
-  const vendasPorPizza = {};
+  const vendasPorPizza: { [key: string]: { nome: string; quantidade: number; total: number } } = {};
   pedidosFiltrados.forEach(pedido => {
     if (vendasPorPizza[pedido.pizza]) {
       vendasPorPizza[pedido.pizza].quantidade += pedido.quantidade;
@@ -57,7 +57,7 @@ const Relatorio = () => {
     .sort((a, b) => b.quantidade - a.quantidade);
 
   // Vendas por status
-  const statusCount = {};
+  const statusCount: { [key: string]: number } = {};
   pedidos.forEach(p => {
     statusCount[p.status] = (statusCount[p.status] || 0) + 1;
   });
@@ -119,7 +119,7 @@ const Relatorio = () => {
             <p className="text-gray-500 text-center py-8">Nenhuma venda no período selecionado.</p>
           ) : (
             <div className="space-y-4">
-              {rankingPizzas.slice(0, 5).map((pizza, index) => (
+              {rankingPizzas.slice(0, 5).map((pizza: { nome: string; quantidade: number; total: number }, index) => (
                 <div key={index} className="flex items-center justify-between">
                   <div className="flex items-center space-x-3">
                     <div className="bg-red-100 text-red-600 w-8 h-8 rounded-full flex items-center justify-center font-bold">
@@ -147,7 +147,7 @@ const Relatorio = () => {
             {Object.entries(statusCount).map(([status, count]) => {
               const total = pedidos.length;
               const porcentagem = ((count / total) * 100).toFixed(1);
-              const cores = {
+              const cores: { [key: string]: string } = {
                 'Pendente': 'bg-yellow-500',
                 'Em Preparo': 'bg-blue-500',
                 'Saiu para Entrega': 'bg-purple-500',

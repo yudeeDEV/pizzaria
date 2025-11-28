@@ -1,6 +1,6 @@
-# 🚀 Script de Inicialização - Sistema Pizzaria Marcio
+# 🚀 Script de Inicialização - Sistema Pizzaria Mana
 
-Write-Host "🍕 Iniciando Sistema de Gerenciamento de Pizzaria Marcio..." -ForegroundColor Green
+Write-Host "🍕 Iniciando Sistema de Gerenciamento de Pizzaria Mana..." -ForegroundColor Green
 Write-Host ""
 
 # Verificar se node_modules existe

@@ -5,11 +5,9 @@ import {
   Pizza, 
   Package, 
   TrendingUp, 
-  BookOpen, 
   Menu,
   X,
-  ShoppingCart,
-  Search
+  ShoppingCart
 } from 'lucide-react';
 
 interface LayoutProps {
@@ -45,7 +43,7 @@ const Layout = ({ children }: LayoutProps) => {
             </button>
             <div className="flex items-center space-x-2">
               <Pizza size={32} />
-              <h1 className="text-2xl font-bold">Pizzaria Marcio</h1>
+              <h1 className="text-2xl font-bold">Pizzaria Mana</h1>
             </div>
           </div>
         </div>
