@@ -47,7 +47,7 @@ const pizzasServidor: PizzaServidor[] = [
 ];
 
 // Rota para buscar pizzas
-app.get('/api/pizzas', (req: Request, res: Response) => {
+app.get('/api/pizzas', (_req: Request, res: Response) => {
   console.log('📡 Requisição recebida: GET /api/pizzas');
   res.json({
     success: true,
