@@ -47,8 +47,8 @@ const pizzasServidor: PizzaServidor[] = [
 ];
 
 // Rota para buscar pizzas
-app.get('/api/pizzas', (_req: Request, res: Response) => {
-  console.log('📡 Requisição recebida: GET /api/pizzas');
+app.get('/pizzas', (_req: Request, res: Response) => {
+  console.log('📡 Requisição recebida: GET /pizzas');
   res.json({
     success: true,
     data: pizzasServidor,
@@ -59,5 +59,7 @@ app.get('/api/pizzas', (_req: Request, res: Response) => {
 const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`🚀 Servidor mock rodando em http://localhost:${PORT}`);
-  console.log(`📋 Endpoint disponível: http://localhost:${PORT}/api/pizzas`);
+  console.log(`📋 Endpoint disponível (via proxy Vite): http://localhost:5173/api/pizzas`);
 });
+
+export default app;
