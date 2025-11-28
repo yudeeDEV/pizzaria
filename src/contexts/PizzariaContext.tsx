@@ -24,7 +24,7 @@ export const PizzariaProvider = ({ children }: PizzariaProviderProps) => {
   // Buscar pizzas do servidor
   const buscarPizzasServidor = async (): Promise<Pizza[]> => {
     try {
-      const response = await fetch('http://localhost:3000/api/pizzas');
+      const response = await fetch('/api/pizzas');
       const dados = await response.json();
       
       if (dados.success) {
