@@ -25,14 +25,26 @@ export const PizzariaProvider = ({ children }: PizzariaProviderProps) => {
   const buscarPizzasServidor = async (): Promise<Pizza[]> => {
     try {
       const response = await fetch('/api/pizzas');
+
+      if (!response.ok) {
+        console.error(`Erro na API: ${response.status} ${response.statusText}`);
+        // Tenta ler o corpo da resposta para mais detalhes, se houver
+        const errorBody = await response.text();
+        console.error('Corpo da resposta de erro:', errorBody);
+        return [];
+      }
+
       const dados = await response.json();
       
       if (dados.success) {
         console.log('✅ Pizzas carregadas do servidor:', dados.data);
         return dados.data;
       }
+
+      console.warn('API respondeu com sucesso=false', dados);
       return [];
     } catch (error) {
+      console.error('Falha na requisição fetch:', error);
       console.log('⚠️ Servidor offline, usando apenas localStorage');
       return [];
     }
