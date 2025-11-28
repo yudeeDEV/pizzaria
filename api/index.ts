@@ -56,10 +56,4 @@ app.get('/pizzas', (_req: Request, res: Response) => {
   });
 });
 
-const PORT = 3000;
-app.listen(PORT, () => {
-  console.log(`🚀 Servidor mock rodando em http://localhost:${PORT}`);
-  console.log(`📋 Endpoint disponível (via proxy Vite): http://localhost:5173/api/pizzas`);
-});
-
 export default app;
